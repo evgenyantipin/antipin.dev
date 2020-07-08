@@ -1,19 +1,21 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import Bio from "../components/bio"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
+import Bio from "components/bio"
+import Layout from "components/layout"
+import SEO from "components/seo"
+import { rhythm } from "utils/typography"
+import { uniq } from "lodash"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
-
+  console.log(uniq(posts.map(p => p.node.fields.category)))
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <Bio />
+
       {posts.map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug
         return (
@@ -36,6 +38,17 @@ const BlogIndex = ({ data, location }) => {
                   __html: node.frontmatter.description || node.excerpt,
                 }}
               />
+              {node.fields.category && (
+                <div>
+                  Categories
+                  <br />
+                  <div>
+                    <Link to={`/category/${node.fields.category}`}>
+                      {node.fields.category}
+                    </Link>
+                  </div>
+                </div>
+              )}
             </section>
           </article>
         )
@@ -64,6 +77,9 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             title
             description
+          }
+          fields {
+            category
           }
         }
       }

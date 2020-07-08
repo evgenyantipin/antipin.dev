@@ -1,10 +1,10 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import Bio from "../components/bio"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import { rhythm, scale } from "../utils/typography"
+import Bio from "components/bio"
+import Layout from "components/layout"
+import SEO from "components/seo"
+import { rhythm, scale } from "utils/typography"
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
   const post = data.markdownRemark
@@ -37,6 +37,18 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
             {post.frontmatter.date}
           </p>
         </header>
+
+        {post.fields.category && (
+          <div>
+            Categories
+            <br />
+            <div>
+              <Link to={`/category/${post.fields.category}`}>
+                {post.fields.category}
+              </Link>
+            </div>
+          </div>
+        )}
         <section dangerouslySetInnerHTML={{ __html: post.html }} />
         <hr
           style={{
@@ -95,6 +107,9 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+      }
+      fields {
+        category
       }
     }
   }

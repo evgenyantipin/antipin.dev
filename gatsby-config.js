@@ -1,15 +1,12 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
+    title: `Блог о программировании`,
     author: {
-      name: `Kyle Mathews`,
+      name: `Евгений Антипин`,
       summary: `who lives and works in San Francisco building useful things.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
-    social: {
-      twitter: `kylemathews`,
-    },
+    siteUrl: `https://antipin.dev`,
   },
   plugins: [
     {
@@ -60,7 +57,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
+        name: `Блог Евгения Антипина`,
         short_name: `GatsbyJS`,
         start_url: `/`,
         background_color: `#ffffff`,
@@ -74,6 +71,12 @@ module.exports = {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-categories",
+      options: {
+        templatePath: `${__dirname}/src/templates/category.js`,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
