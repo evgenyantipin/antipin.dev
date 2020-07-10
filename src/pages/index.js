@@ -1,16 +1,17 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import format from "date-fns/format"
+import { ru } from "date-fns/locale"
 
 import Bio from "components/bio"
 import Layout from "components/layout"
 import SEO from "components/seo"
 import { rhythm } from "utils/typography"
-import { uniq } from "lodash"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
-  console.log(uniq(posts.map(p => p.node.fields.category)))
+  // console.log(uniq(posts.map(p => p.node.fields.category)))
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
@@ -30,19 +31,19 @@ const BlogIndex = ({ data, location }) => {
                   {title}
                 </Link>
               </h3>
-              <small>{node.frontmatter.date}</small>
+              {/* <small>{node.frontmatter.date}</small> */}
+
+              <time dateTime={node.frontmatter.date}>
+                {format(new Date(node.frontmatter.date), "d MMMM, yyyy", {
+                  locale: ru,
+                })}
+              </time>
             </header>
             <section>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
-                }}
-              />
               {node.fields.category && (
                 <div>
-                  Categories
-                  <br />
                   <div>
+                    Категория:{" "}
                     <Link to={`/category/${node.fields.category}`}>
                       {node.fields.category}
                     </Link>

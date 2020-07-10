@@ -25,7 +25,6 @@ const Bio = () => {
         siteMetadata {
           author {
             name
-            summary
           }
         }
       }
@@ -54,7 +53,7 @@ const Bio = () => {
         }}
       />
       <p>
-        Written by <strong>{author.name}</strong> {author.summary}
+        <strong>{author.name}</strong>
       </p>
     </div>
   )

@@ -1,14 +1,14 @@
 module.exports = {
   siteMetadata: {
-    title: `Блог о программировании`,
+    title: `Antipin.dev`,
     author: {
       name: `Евгений Антипин`,
-      summary: `who lives and works in San Francisco building useful things.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://antipin.dev`,
   },
   plugins: [
+    `gatsby-plugin-sass`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -58,7 +58,7 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Блог Евгения Антипина`,
-        short_name: `GatsbyJS`,
+        short_name: `Antipin.dev`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
